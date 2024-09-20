@@ -229,6 +229,14 @@ body.dark-mode .toggler-icon span {
     color: black;
 }
 
+body.dark-mode .post-title {
+    color: white !important;
+}
+
+body.dark-mode .post-title-link {
+    text-decoration-color: white !important; /* Corrected property */
+}
+
 .post-title-link{
     color: black !important;
 }
