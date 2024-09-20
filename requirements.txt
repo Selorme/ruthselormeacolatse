@@ -12,6 +12,7 @@ colorama==0.4.6
 docx==0.2.4
 ffmpeg==1.4
 Flask==3.0.3
+Flask-Admin==1.5.8
 flask_bootstrap==3.3.7.1
 Flask-Bootstrap==3.3.7.1
 frozenlist==1.4.1
