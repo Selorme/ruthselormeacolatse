@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+  <!-- Introduction Hero -->
+  <section class="container" id="content">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
+      <div class="col-10 col-sm-8 col-lg-6 mx-auto">
+        <div class="responsive-image-container d-block mx-auto">
+          <img src="{{ url_for('static', filename='img/rs1.png') }}" alt="About page header image" class="responsive-image">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <video class="responsive-video" src="#" ></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div>
+
+              <p class="paragraph block-text"><strong>Welcome to My World!</strong></p>
+
+              <p class="paragraph">Hello! I'm Ruth Selorme Acolatse, a passionate Ghanaian currently pursuing an undergraduate degree in Journalism at Marmara University in Istanbul, Turkey. My journey brought me to Türkiye, and I’ve chronicled the experiences that led me <a href="{{ url_for('turkiyegecilmez') }}">here</a> on my blog. Feel free to dive into my story and explore how this vibrant city has shaped my path.</p>
+
+              <p class="paragraph">Debate has been a significant part of my life. I've had the honor of judging the Open Grand Final of the World Universities Debating Championships twice (2023 & 2024), as well as the Grand Final of the World Schools Debating Championship twice in 2023 and 2024. These experiences have fueled my love for intellectual challenge and eloquence.</p>
+
+              <p class="paragraph">Public speaking is another arena where I strive to excel. I’m proud to have earned the title of World's Public Speaking Runner-Up for 2024, a testament to my dedication and passion for compelling communication.</p>
+
+              <p class="paragraph">Travel is close to my heart. According to my Google Maps history, I've circled the globe more than twice and visited 24 countries. My travels have been a source of inspiration and adventure, enriching my life in countless ways.</p>
+
+              <p class="paragraph">Currently, I'm delving into the world of programming, learning Python with hopes of becoming a successful programmer. Stay tuned for updates on my coding journey and discoveries <a href="{{ url_for('projects') }}">here!</a></p>
+
+              <p class="paragraph">Now that I've shared a glimpse of my world, explore the menu to discover more about me and my endeavors. Grab a snack, settle in, and enjoy your visit!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+{% endblock %}

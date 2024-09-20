@@ -1,0 +1,59 @@
+<!-- Nav Bar -->
+<section class="nav-item">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainNav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img class="logo" src="{{ url_for('static', filename='img/rs1.png') }}" height="60" alt="Ruth Selorme Logo">
+      </a>
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="toggler-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Portfolio
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('projects') }}">Projects</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url_for('cvresume') }}">Download My CV/Resume</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('ugescapades') }}">UG Escapades</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('turkiyegecilmez') }}">Türkiye Geçilmez</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('audacity') }}">Audacious Men Series</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#emailModal">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+          </li>
+        </ul>
+        <!-- Dark Mode Toggle Button -->
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="darkModeToggle">
+          <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+        </div>
+        <form class="d-flex ms-auto" role="search" action="{{ url_for('search') }}" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="Type here" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</section>

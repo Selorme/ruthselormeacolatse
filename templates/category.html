@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <header>
+        <h1>Posts in {{ current_category }}</h1>
+    </header>
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="list-unstyled">
+                        {% for post in posts %}
+                            <li>
+                                <a href="{{ url_for('show_post', index=post.id) }}">
+                                    {{ post.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Categories List -->
+    <div class="container mt-5">
+        <div class="category-list">
+            {% for category in categories %}
+                <div class="category-item">
+                    <a href="{{ url_for('blogs', category=category) }}">{{ category }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

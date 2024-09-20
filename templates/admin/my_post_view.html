@@ -1,0 +1,8 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block body %}
+<h1>Post Content</h1>
+<div>
+    {{ form.content.data|safe }}
+</div>
+{% endblock %}

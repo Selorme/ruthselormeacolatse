@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+
+    <!-- Post header with background image -->
+    <header class="masthead" style="background-image: url('{{ post.image_url }}')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1>{{ post.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div>
+                        {{ post.content|safe }}
+                    </div>
+                    <p class="text-muted">Category: {{ post.category }}</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Blog Post Navigation -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Other Posts in this Category</h3>
+                <ul class="list-unstyled">
+                    {% for p in all_posts %}
+                        {% if p.id != post.id %}  <!-- Exclude the current post -->
+                            <li>
+                                <a href="{{ url_for('show_post', index=p.id) }}">
+                                    {{ loop.index }}. {{ p.title }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Categories -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Other Blog Categories</h3>
+                <div class="category-list">
+                    {% for category in categories %}
+                        <div class="category-item">
+                            <!-- Replace spaces with hyphens for URL -->
+                            <a href="{{ url_for('show_category', category=category.replace(' ', '-')) }}">{{ category }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comment Section -->
+    <div class="container mt-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h3>Leave a Comment</h3>
+                <form action="{{ url_for('submit_comment', post_id=post.id) }}" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Submit Comment</button>
+                </form>
+
+                <!-- Display existing comments -->
+                <div class="mt-5">
+                    <h3>Comments</h3>
+                    {% if comments %}
+                        <ul class="list-unstyled">
+                            {% for comment in comments %}
+                                <li class="mb-4">
+                                    <strong>{{ comment.name }}</strong> <em>{{ comment.timestamp.strftime('%B %d, %Y at %I:%M %p') }}</em>
+                                    <p>{{ comment.content }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No comments yet. Be the first to comment!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

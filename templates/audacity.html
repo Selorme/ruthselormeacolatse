@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<!--header for all UG escapades blog page-->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/home-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1 class="heading">Audacious Men Series</h1>
+                    <span class="subheading"><i>Where men exist, audacity abounds...</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Posts home page layout -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% for post in posts %}
+            <div class="post-preview d-flex flex-column flex-md-row mb-4">
+                 <!-- Image on top on smaller screens and on the left on larger screens -->
+                <div class="mb-3 mb-md-0 me-md-3">
+                    <img class="img-fluid" src="{{ post.image_url }}" alt="{{ post.title }}" style="max-width: 200px; height: auto;">
+                </div>
+                <!-- Title and content on the right on larger screens and below on smaller screens -->
+                <div>
+                    <a class="post-title-link" href="{{ url_for('show_post', index=post.id) }}">
+                        <h2 class="post-title">
+                            {{ post.title }}
+                        </h2>
+                    </a>
+                    <!-- Display the first three lines of the content -->
+                    <p>
+                        {{ post.content|truncate(300, True, '...')|safe }}
+                        <a href="{{ url_for('show_post', index=post.id) }}"><em>Read More...</em></a>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

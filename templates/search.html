@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Search Results for "{{ query }}"</h1>
+
+    {% if results %}
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% for post in results %}
+            <div class="post-preview d-flex flex-column flex-md-row mb-4">
+                <!-- Image on top on smaller screens and on the left on larger screens -->
+                <div class="mb-3 mb-md-0 me-md-3">
+                    <img class="img-fluid" src="{{ post.image_url }}" alt="{{ post.title }}" style="max-width: 200px; height: auto;">
+                </div>
+                <!-- Title and content on the right on larger screens and below on smaller screens -->
+                <div>
+                    <a class="post-title-link" href="{{ url_for('show_post', index=post.id) }}">
+                        <h2 class="post-title">
+                            {{ post.title }}
+                        </h2>
+                    </a>
+                    <!-- Display the first 300 characters of the content safely -->
+                    <p>
+                        {{ post.content[:300]|safe }}...
+                        <a href="{{ url_for('show_post', index=post.id) }}"><em>Read More...</em></a>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <p>No results found for "{{ query }}".</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+{% endblock %}
