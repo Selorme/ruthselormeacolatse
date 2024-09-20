@@ -124,9 +124,9 @@ def turkiyegecilmez():
     return render_template("turkiyegecilmez.html", posts=posts,  copyright_year=year)
 
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html", copyright_year=year)
+# @app.route("/contact")
+# def contact():
+#     return render_template("contact.html", copyright_year=year)
 
 
 @app.route("/Audacious-Men-Series")

@@ -155,6 +155,20 @@ body.dark-mode .toggler-icon span {
 .lead-text {
   font-family: 'Amsterdam Four_ttf', sans-serif;
 }
+
+body.dark-mode #me {
+    color: white !important;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 0.5px 0 black,
+        1px 1px 0 black;
+}
+
+#me {
+    padding-bottom: 30px;
+}
+
 /* Adds padding to the content of each page to ensure nothing gets stuck under the navbar */
 #content {
   padding-top: 10px;
@@ -439,4 +453,10 @@ body.dark-mode .btn-outline-success {
 
 .form-group {
     text-align: left;
+}
+
+#call-to-action {
+    text-align: center;
+    font-size: 50px;
+    padding-bottom: 10px;
 }
