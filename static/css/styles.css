@@ -369,13 +369,17 @@ body.dark-mode .form-control {
 }
 
 .form-control {
-    color: white !important; /* Change the text color to white */
+    color: black !important; /* Change the text color to white */
     background-color: transparent; /* Optional: If you want a transparent background */
 }
 
 /* Dark mode */
 body.dark-mode .form-control::placeholder {
   color: white; /* White placeholder color in dark mode */
+}
+
+body.dark-mode .form-control {
+    color: white !important;
 }
 
 body.dark-mode .btn-outline-success {
