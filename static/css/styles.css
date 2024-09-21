@@ -171,10 +171,6 @@ body.dark-mode .toggler-icon span {
   font-family: 'Amsterdam Four_ttf', sans-serif;
 }
 
-body.dark-mode #me {
-    color: black !important;
-}
-
 #me {
     padding-bottom: 30px;
 }
@@ -410,11 +406,6 @@ body.dark-mode .form-control::placeholder {
   color: white; /* White placeholder color in dark mode */
 }
 
-/* text color for header hero in dark mode */
-body.dark-mode .me-text {
-    color: black;
-}
-
 body.dark-mode .form-control {
     color: white !important;
 }
@@ -474,4 +465,5 @@ body.dark-mode .btn-outline-success {
     text-align: center;
     font-size: 50px;
     padding-bottom: 10px;
+    padding-top: 40px;
 }

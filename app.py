@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from datetime import datetime
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -47,10 +47,13 @@ class Post(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)  # For replies
     name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
     content = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Relationship for replies
+    replies = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]), lazy=True)
 
     def __repr__(self):
         return f'<Comment {self.content[:20]}...>'
@@ -130,7 +133,7 @@ def contact():
     if request.method == "POST":
         name = request.form['name']
         email = request.form['email']
-        messages = request.form['message']
+        message = request.form['message']
 
         my_email = "ruthacolatse.official@gmail.com"
         password = "ekdkxegsfexyfpkd"
@@ -138,10 +141,13 @@ def contact():
         with smtplib.SMTP("smtp.gmail.com", 587) as connection:
             connection.starttls()
             connection.login(user=my_email, password=password)
-            connection.sendmail(from_addr=email, to_addrs=my_email,
-                                msg=f"Subject: New Message From Your Website!\n\nName: {name}\nEmail address: {email}\nMessage: {messages}")
-        return render_template("contact.html", message_sent=True, copyright_year=year)
-    return render_template("contact.html", message_sent=False, copyright_year=year)
+            connection.sendmail(from_addr=my_email, to_addrs=my_email,
+                                msg=f"Subject: New Message From Your Website!\n\nName: {name}\nEmail: {email}\nMessage: {message}")
+
+        flash('Message sent successfully!', 'success')  # Flash message for success
+        return redirect(url_for('contact'))  # Redirect to the contact page
+
+    return render_template("index.html", message_sent=False, copyright_year=year)
 
 
 @app.route("/Audacious-Men-Series")
@@ -191,17 +197,20 @@ def search():
 def submit_comment(post_id):
     # Retrieve the data from the form
     name = request.form['name']
-    email = request.form['email']
-    comment_content = request.form['comment']
 
-    # Check if this is a reply to an existing comment
-    parent_id = request.form.get('parent_id')  # Use parent_id for replies
+    # Determine if it's a reply or a new comment
+    parent_id = request.form.get('parent_id')  # This will be None for new comments
+
+    # Use different form field names based on the context
+    if parent_id:
+        comment_content = request.form['reply_content']  # Use 'reply_content' for replies
+    else:
+        comment_content = request.form['comment']  # Use 'comment' for main comments
 
     # Create a new comment instance
     new_comment = Comment(
         post_id=post_id,
         name=name,
-        email=email,
         content=comment_content,
         timestamp=datetime.utcnow()  # Use the current UTC timestamp
     )

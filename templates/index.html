@@ -3,7 +3,7 @@
 {% block content %}
 
   <!-- Introduction Hero -->
-  <section class="container" id="content" style="background-image: url('{{ url_for('static', filename='img/hbg.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <section class="container" id="content">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
       <div class="col-10 col-sm-8 col-lg-6 mx-auto">
         <div class="responsive-image-container d-block mx-auto">
@@ -11,17 +11,17 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <h1 class="lead-text display-5 lh-1 mb-3" id="me"><strong>Ruth Selorme Acolatse</strong></h1>
-        <h4 class="me-text">Journalism Major | Marmara University</h4>
-        <h5 class="me-text"><i>Hobbies</i></h5>
-          <p class="me-text">Python programming</p>
-          <p class="me-text">Web Service Development</p>
-          <p class="me-text">Travelling</p>
-          <p class="me-text">Singing</p>
-          <p class="me-text">Cooking</p>
-          <p class="me-text">Journaling</p>
-          <p class="me-text">Content creation</p>
-          <p class="me-text">Debate (apparently it's a hobby)
+        <h1 class="lead-text display-5 lh-1 mb-3" id="me">Ruth Selorme Acolatse</h1>
+        <h4>Journalism Major | Marmara University</h4>
+        <h5><i>Hobbies</i></h5>
+          <p>Python programming</p>
+          <p>Web Service Development</p>
+          <p>Travelling</p>
+          <p>Singing</p>
+          <p>Cooking</p>
+          <p>Journaling</p>
+          <p>Content creation</p>
+          <p>Debate (apparently it's a hobby)
         <p><a href="{{ url_for('about') }}"><em>Continue Reading...</em></a></p>
        </div>
       </div>
@@ -109,32 +109,34 @@
     </div>
   </section>
 
-      <!--contact form-->
-    <section class="container d-flex justify-content-center align-items-center">
-      <div class="my-5 col-md-6">
-        {% if message_sent %}
-          <p>Message sent successfully!</p>
-        {% else %}
-          <h3 class="lead-text" id="call-to-action">Work with Selorme!</h3>
-          <p>
-            For collaborations, partnerships, freelance opportunities, feedback, suggestions or any general enquiry, please fill the form below to send me a message:
-          </p>
-        {% endif %}
-            <form action="/contact" method="post" id="contactForm" name="sentMessage">
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="name" name="name" type="text" required>
-                    <label for="name">Name</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="email" name="email" type="email" required>
-                    <label for="email">Email address</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" id="message" name="message" required style="height: 12rem"></textarea>
-                    <label for="message">Message</label>
-                </div>
-                <button class="btn btn-primary text-uppercase w-100" id="submitButton" type="submit">Send</button>
-            </form>
+  <!--contact form-->
+  <section class="container d-flex justify-content-center align-items-center">
+    <div class="my-5 col-md-6">
+      {% if get_flashed_messages() %}
+        <div class="alert alert-success">
+          {{ get_flashed_messages()[0] }}
         </div>
-    </section>
+      {% endif %}
+      <h3 class="lead-text" id="call-to-action">Work with Selorme!</h3>
+      <p>
+        For collaborations, partnerships, freelance opportunities, feedback, suggestions or any general enquiry, please fill the form below to send me a message:
+      </p>
+      <form action="/contact" method="post" id="contactForm" name="sentMessage">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="name" name="name" type="text" required>
+          <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="email" name="email" type="email" required>
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea class="form-control" id="message" name="message" required style="height: 12rem"></textarea>
+          <label for="message">Message</label>
+        </div>
+        <button class="btn btn-primary text-uppercase w-100" id="submitButton" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
 {% endblock %}

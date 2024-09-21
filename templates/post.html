@@ -40,10 +40,6 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
                         <label for="comment">Comment</label>
                         <textarea class="form-control" id="comment" name="comment" rows="5" required></textarea>
                     </div>
@@ -60,12 +56,13 @@
                                     <strong>{{ comment.name }}</strong> <em>{{ comment.timestamp.strftime('%B %d, %Y at %I:%M %p') }}</em>
                                     <p>{{ comment.content }}</p>
 
-                                    <!-- Reply form -->
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#replyForm{{ comment.id }}">Reply</button>
+                                    <!-- Reply button -->
+                                    <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#replyForm{{ comment.id }}">Reply</button>
                                     <div class="collapse" id="replyForm{{ comment.id }}">
-                                        <form action="{{ url_for('add_comment', parent_id=comment.id) }}" method="post">
+                                        <form action="{{ url_for('submit_comment', post_id=post.id, parent_id=comment.id) }}" method="POST">
+                                            <input type="hidden" name="name" value="{{ comment.name }}">
                                             <div class="mb-3">
-                                                <textarea class="form-control" name="reply_content" rows="3" required placeholder="Write your reply..."></textarea>
+                                                <textarea class="form-control" name="comment" rows="3" required placeholder="Write your reply..."></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit Reply</button>
                                         </form>
@@ -100,7 +97,7 @@
                 <h3>Other Posts in this Category</h3>
                 <ul class="list-unstyled">
                     {% for p in all_posts %}
-                        {% if p.id != post.id %}  <!-- Exclude the current post -->
+                        {% if p.id != post.id %}
                             <li>
                                 <a href="{{ url_for('show_post', index=p.id) }}">
                                     {{ loop.index }}. {{ p.title }}
