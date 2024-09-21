@@ -5,11 +5,6 @@
   <!-- Introduction Hero -->
   <section class="container" id="content">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
-<!--      <div class="col-10 col-sm-8 col-lg-6 mx-auto">-->
-<!--        <div class="responsive-image-container d-block mx-auto">-->
-<!--          <img src="{{ url_for('static', filename='img/rs1.png') }}" alt="About page header image" class="responsive-image">-->
-<!--        </div>-->
-<!--      </div>-->
       <div class="col-lg-6">
         <div class="responsive-image-container d-block mx-auto">
           <img src="{{ url_for('static', filename='img/aboutpage.jpg') }}" alt="my image for about page" class="responsive-image">
@@ -38,11 +33,14 @@
               <p class="paragraph">Currently, I'm delving into the world of programming, learning Python, exploring Artificial Intelligence and machine learning with hopes of becoming a professional engineer. Stay tuned for updates on my coding journey and discoveries <a href="{{ url_for('projects') }}">here!</a> My greatest achievement of all is writing the very code that built this website by myself!</p>
 
               <p class="paragraph">Now that I've shared a glimpse of my world, explore the menu to discover more about me and my endeavors. Grab a snack, settle in, and enjoy your visit! You can also follow my adventures on social media: </p>
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                  <li class="ms-3"><a class="text-body-secondary" href="https://www.linkedin.com/in/ruth-acolatse-0450181a1/"><img src="/static/img/linkedin.svg" /><svg class="bi" width="30" height="30"><use xlink:href="#linkedin"></use></svg></a></li>
-                  <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/sselorme"><img src="/static/img/instagram.svg" /><svg class="bi" width="30" height="30"><use xlink:href="#instagram"></use></svg></a></li>
-                  <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/sselorme"><img src="/static/img/facebook.svg" /><svg class="bi" width="30" height="30"><use xlink:href="#facebook"></use></svg></a></li>
-                </ul>
+
+              <!-- Social Media Icons Centered -->
+              <div class="d-flex justify-content-center align-items-center gap-3">
+                <a class="text-body-secondary" href="https://www.linkedin.com/in/ruth-acolatse-0450181a1/"><img class="socials" src="/static/img/linkedin.svg" width="30" height="30" /></a>
+                <a class="text-body-secondary" href="https://www.instagram.com/sselorme"><img class="socials" src="/static/img/instagram.svg" width="30" height="30" /></a>
+                <a class="text-body-secondary" href="https://www.facebook.com/sselorme"><img class="socials" src="/static/img/facebook.svg" width="30" height="30" /></a>
+              </div>
+
             </div>
           </div>
         </div>

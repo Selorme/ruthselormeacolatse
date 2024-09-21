@@ -10,8 +10,8 @@
 }
 
 /* Add some padding between items on the navbar*/
-.nav-item {
-    padding-right: 30px;
+.nav-link {
+    padding-right: 30px !important;
 }
 
 /* Ensures navbar stays or sticks to the top when you are scrolling the page */
@@ -109,8 +109,16 @@ body.dark-mode .toggler-icon span {
     color:  #0D6EFD !important; /* Override Bootstrap's default styles */
 }
 
-.logo {
-    outline: 1.5px solid black; /* 3px is the width, solid is the style, black is the color */
+.socials {
+  margin: 0 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.gap-3 {
+  gap: 20px;
 }
 
 /* For my name and tiny logo on the navbar */
@@ -142,6 +150,13 @@ body.dark-mode .toggler-icon span {
     border-radius: 15px
 }
 
+/* Ensures the image doesn't overflow its container */
+.responsive-image-index {
+    width: 100%; /* Fill the width of the container */
+    height: 40vh; /* Maintain aspect ratio */
+    border-radius: 15px
+}
+
 /* Makes the border of the logo image not rounder*/
 .logo {
     border-radius: 15px
@@ -157,12 +172,7 @@ body.dark-mode .toggler-icon span {
 }
 
 body.dark-mode #me {
-    color: white !important;
-    text-shadow:
-        -1px -1px 0 black,
-        1px -1px 0 black,
-        -1px 0.5px 0 black,
-        1px 1px 0 black;
+    color: black !important;
 }
 
 #me {
@@ -398,6 +408,11 @@ body.dark-mode .form-control {
 /* Dark mode */
 body.dark-mode .form-control::placeholder {
   color: white; /* White placeholder color in dark mode */
+}
+
+/* text color for header hero in dark mode */
+body.dark-mode .me-text {
+    color: black;
 }
 
 body.dark-mode .form-control {

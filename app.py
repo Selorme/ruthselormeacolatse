@@ -7,6 +7,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from markupsafe import Markup
 import click
+import smtplib
 
 
 # Define your PostView to render HTML content properly
@@ -121,12 +122,26 @@ def ugescapades():
 @app.route("/Türkiye-Geçilmez")
 def turkiyegecilmez():
     posts = Post.query.filter_by(category='Türkiye Geçilmez').all()
-    return render_template("turkiyegecilmez.html", posts=posts,  copyright_year=year)
+    return render_template("turkiyegecilmez.html", posts=posts, copyright_year=year)
 
 
-# @app.route("/contact")
-# def contact():
-#     return render_template("contact.html", copyright_year=year)
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        name = request.form['name']
+        email = request.form['email']
+        messages = request.form['message']
+
+        my_email = "ruthacolatse.official@gmail.com"
+        password = "ekdkxegsfexyfpkd"
+
+        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+            connection.starttls()
+            connection.login(user=my_email, password=password)
+            connection.sendmail(from_addr=email, to_addrs=my_email,
+                                msg=f"Subject: New Message From Your Website!\n\nName: {name}\nEmail address: {email}\nMessage: {messages}")
+        return render_template("contact.html", message_sent=True, copyright_year=year)
+    return render_template("contact.html", message_sent=False, copyright_year=year)
 
 
 @app.route("/Audacious-Men-Series")
@@ -146,7 +161,8 @@ def show_post(index):
     # Get unique categories for navigation
     categories = db.session.query(Post.category).distinct().all()
     category_list = [category[0] for category in categories]
-    return render_template("post.html", post=post, all_posts=all_posts, current_category=post.category, categories=category_list, comments=comments)
+    return render_template("post.html", post=post, all_posts=all_posts, current_category=post.category,
+                           categories=category_list, comments=comments)
 
 
 @app.cli.command('create-db')
@@ -178,6 +194,9 @@ def submit_comment(post_id):
     email = request.form['email']
     comment_content = request.form['comment']
 
+    # Check if this is a reply to an existing comment
+    parent_id = request.form.get('parent_id')  # Use parent_id for replies
+
     # Create a new comment instance
     new_comment = Comment(
         post_id=post_id,
@@ -186,6 +205,10 @@ def submit_comment(post_id):
         content=comment_content,
         timestamp=datetime.utcnow()  # Use the current UTC timestamp
     )
+
+    if parent_id:
+        # If there's a parent_id, this is a reply
+        new_comment.parent_id = parent_id
 
     # Add and commit the new comment to the database
     db.session.add(new_comment)
