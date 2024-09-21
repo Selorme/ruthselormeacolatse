@@ -8,6 +8,21 @@ from flask_admin.contrib.sqla import ModelView
 from markupsafe import Markup
 import click
 import smtplib
+import os
+from dotenv import load_dotenv
+from supabase import create_client, Client
+
+# Load environment variables
+load_dotenv()
+
+# Supabase setup
+supabase_url = os.getenv('SUPABASE_URL')
+supabase_key = os.getenv('SUPABASE_ANON_KEY')
+supabase: Client = create_client(supabase_url, supabase_key)
+
+# Email and password
+google_email = os.getenv('MY_EMAIL')
+google_password = os.getenv('PASSWORD')
 
 
 # Define your PostView to render HTML content properly
@@ -81,25 +96,21 @@ def about():
 @app.route("/blog/<category>")
 def blogs(category):
     if category:
-        # Fetch posts that belong to the selected category
         posts = Post.query.filter_by(category=category).all()
         header = f"{category} Blogs"
     else:
-        # No category, show recent posts or all categories
-        posts = Post.query.order_by(Post.id.desc()).limit(9).all()  # Example: show the 5 most recent posts
+        posts = Post.query.order_by(Post.id.desc()).limit(9).all()
         header = "Recent Blogs"
 
     # Fetch all unique categories from the Post table
     categories = db.session.query(Post.category).distinct().all()
     category_list = [cat[0] for cat in categories]
 
-    # Render blog.html with posts, categories, and current category or header
     return render_template("blog.html", posts=posts, categories=category_list, header=header)
 
 
 @app.route("/<category>")
 def show_category(category):
-    # Replace hyphens with spaces to match category names in the database
     category = category.replace('-', ' ')
     posts = Post.query.filter_by(category=category).all()
     return render_template("category.html", posts=posts, category=category, copyright_year=year)
@@ -135,8 +146,8 @@ def contact():
         email = request.form['email']
         message = request.form['message']
 
-        my_email = "ruthacolatse.official@gmail.com"
-        password = "ekdkxegsfexyfpkd"
+        my_email = google_email
+        password = google_password
 
         with smtplib.SMTP("smtp.gmail.com", 587) as connection:
             connection.starttls()
@@ -144,8 +155,8 @@ def contact():
             connection.sendmail(from_addr=my_email, to_addrs=my_email,
                                 msg=f"Subject: New Message From Your Website!\n\nName: {name}\nEmail: {email}\nMessage: {message}")
 
-        flash('Message sent successfully!', 'success')  # Flash message for success
-        return redirect(url_for('contact'))  # Redirect to the contact page
+        flash('Message sent successfully!', 'success')
+        return redirect(url_for('contact'))
 
     return render_template("index.html", message_sent=False, copyright_year=year)
 
@@ -164,7 +175,6 @@ def show_post(index):
     all_posts = Post.query.filter_by(category=post.category).all()
     comments = Comment.query.filter_by(post_id=index).order_by(Comment.timestamp.desc()).all()
 
-    # Get unique categories for navigation
     categories = db.session.query(Post.category).distinct().all()
     category_list = [category[0] for category in categories]
     return render_template("post.html", post=post, all_posts=all_posts, current_category=post.category,
@@ -183,7 +193,6 @@ def create_db():
 def search():
     query = request.args.get('q')
     if query:
-        # Perform a search by filtering posts with titles or content matching the query
         results = Post.query.filter(
             (Post.title.ilike(f'%{query}%')) | (Post.content.ilike(f'%{query}%'))
         ).all()
@@ -193,37 +202,51 @@ def search():
     return render_template('search.html', query=query, results=results)
 
 
-@app.route('/submit_comment/<int:post_id>', methods=['POST'])
+@app.route("/submit_comment/<int:post_id>", methods=['POST'])
 def submit_comment(post_id):
-    # Retrieve the data from the form
-    name = request.form['name']
+    parent_id = request.form.get('parent_id', type=int)
+    name = request.form.get('reply_name') if parent_id else request.form.get('name')
+    comment_content = request.form.get('reply_content') if parent_id else request.form.get('comment')
 
-    # Determine if it's a reply or a new comment
-    parent_id = request.form.get('parent_id')  # This will be None for new comments
+    post_exists = Post.query.filter_by(id=post_id).first()
+    if not post_exists:
+        return "Post not found", 404
 
-    # Use different form field names based on the context
-    if parent_id:
-        comment_content = request.form['reply_content']  # Use 'reply_content' for replies
-    else:
-        comment_content = request.form['comment']  # Use 'comment' for main comments
+    if not name or not comment_content:
+        return "Name and comment are required", 400
 
-    # Create a new comment instance
+    # Create and save the new comment in SQLite
+    timestamp = datetime.utcnow()
     new_comment = Comment(
         post_id=post_id,
         name=name,
         content=comment_content,
-        timestamp=datetime.utcnow()  # Use the current UTC timestamp
+        timestamp=timestamp,
+        parent_id=parent_id
     )
-
-    if parent_id:
-        # If there's a parent_id, this is a reply
-        new_comment.parent_id = parent_id
-
-    # Add and commit the new comment to the database
     db.session.add(new_comment)
     db.session.commit()
 
-    # Redirect back to the post page after submission
+    # Prepare data for Supabase
+    data = {
+        'post_id': post_id,
+        'name': name,
+        'content': comment_content,
+        'timestamp': timestamp.isoformat(),
+        'parent_id': parent_id
+    }
+
+    print("Data being sent to Supabase:", data)  # Log the data
+
+    # Check if in production and save to Supabase if true
+    if os.getenv('DEPLOYMENT_ENV') == 'production':
+        response = supabase.table('comment').insert(data).execute()
+
+        if not response.data:
+            print("Error inserting comment:", response)
+        else:
+            print("Comment added successfully:", response.data)
+
     return redirect(url_for('show_post', index=post_id))
 
 

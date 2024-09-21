@@ -467,3 +467,17 @@ body.dark-mode .btn-outline-success {
     padding-bottom: 10px;
     padding-top: 40px;
 }
+
+/* align the comments to the left*/
+.media-body {
+    text-align: left !important;
+}
+
+.text-muted {
+    color: #6c757d !important; /* Bootstrap's muted color */
+    font-size: 0.875em !important; /* Optional: Adjust size to be smaller */
+}
+
+#reply-link {
+    text-align: left;
+}
