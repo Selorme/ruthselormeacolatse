@@ -241,12 +241,14 @@ def submit_comment(post_id):
     # Check if in production and save to Supabase if true
     response = supabase.table('comment').insert(data).execute()
 
-    if not response.data:
-        print("Error inserting comment:", response)
+    if response.status_code != 201:  # Check for successful insertion
+        print("Error inserting comment:", response.json())  # Log the error
+        # Optionally: You could roll back the SQLite commit here if needed
     else:
         print("Comment added successfully:", response.data)
 
     return redirect(url_for('show_post', index=post_id))
+
 
 
 if __name__ == "__main__":
