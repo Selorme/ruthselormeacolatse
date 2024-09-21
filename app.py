@@ -239,13 +239,12 @@ def submit_comment(post_id):
     print("Data being sent to Supabase:", data)  # Log the data
 
     # Check if in production and save to Supabase if true
-    if os.getenv('DEPLOYMENT_ENV') == 'production':
-        response = supabase.table('comment').insert(data).execute()
+    response = supabase.table('comment').insert(data).execute()
 
-        if not response.data:
-            print("Error inserting comment:", response)
-        else:
-            print("Comment added successfully:", response.data)
+    if not response.data:
+        print("Error inserting comment:", response)
+    else:
+        print("Comment added successfully:", response.data)
 
     return redirect(url_for('show_post', index=post_id))
 
