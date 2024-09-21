@@ -396,6 +396,11 @@ body.dark-mode .form-control {
     background-color: #2f2f2f;
 }
 
+body.dark-mode .card {
+    background-color: #2f2f2f;
+    color: white;
+}
+
 .form-control {
     color: black !important; /* Change the text color to white */
     background-color: transparent; /* Optional: If you want a transparent background */
