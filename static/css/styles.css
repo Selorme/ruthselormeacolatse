@@ -211,6 +211,14 @@ body.dark-mode .toggler-icon span {
     color: white; /* Optional: Change text color for contrast */
 }
 
+body.dark-mode .footer-section {
+    background-image: url('/static/img/footerdarkimg.png');
+    background-size: contain; /* Ensure the image covers the entire footer */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    color: white; /* Optional: Change text color for contrast */
+}
+
 /* control the styling for blog text */
 #blog{
     font-size: 50px;
@@ -370,8 +378,8 @@ body.dark-mode .post-title-link {
 }
 
 /* makes the text in the footer black */
-#footer-text {
-    color: black !important;
+body.dark-mode #footer-text {
+    color: white !important;
 }
 
 /* drop down menu link hover should not be highlighted white */
@@ -485,4 +493,17 @@ body.dark-mode .btn-outline-success {
 
 #reply-link {
     text-align: left;
+}
+
+/* svg control for dark and light mode */
+body.dark-mode .ins {
+    content: url('/static/img/instagram.svg');
+}
+
+body.dark-mode .lin {
+    content: url('/static/img/linkedin.svg');
+}
+
+body.dark-mode .fac {
+    content: url('/static/img/facebook.svg');
 }
