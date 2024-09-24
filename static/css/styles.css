@@ -242,6 +242,7 @@ body.dark-mode .footer-section {
 /* Adds padding to the various titles */
 .title {
     padding-top: 10px;
+    text-align: left;
 }
 
 /* paragraph alignment */
