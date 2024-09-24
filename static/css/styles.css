@@ -153,7 +153,6 @@ body.dark-mode .toggler-icon span {
 /* Ensures the image doesn't overflow its container */
 .responsive-image-index {
     width: 100%; /* Fill the width of the container */
-    height: 40vh; /* Maintain aspect ratio */
     border-radius: 15px
 }
 
