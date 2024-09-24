@@ -244,6 +244,11 @@ body.dark-mode .footer-section {
     padding-top: 10px;
 }
 
+/* paragraph alignment */
+.align-left {
+    text-align: left;
+}
+
 /* styling for blog posts*/
 .post-preview {
     border-bottom: 1px solid #ddd;
