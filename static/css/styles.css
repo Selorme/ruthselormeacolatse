@@ -204,7 +204,7 @@ body.dark-mode .toggler-icon span {
 
 /* Background image for footer */
 .footer-section {
-    background-image: url('/static/img/footerbg1.png'); /* Path to your background image */
+    background-image: url('/static/img/rsbglight.png'); /* Path to your background image */
     background-size: contain; /* Ensure the image covers the entire footer */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent image repetition */
