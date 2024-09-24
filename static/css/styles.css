@@ -426,8 +426,8 @@ body.dark-mode .form-control {
 body.dark-mode .btn-outline-success {
     --bs-btn-color: white;
     --bs-btn-border-color: white;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: white;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: black;
     --bs-btn-hover-border-color: white;
     --bs-btn-focus-shadow-rgb: 25, 135, 84;
     --bs-btn-active-color: #fff;
