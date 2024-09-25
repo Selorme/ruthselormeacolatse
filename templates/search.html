@@ -25,7 +25,7 @@
                     <!-- Display the first 300 characters of the content safely -->
                     <p>
                         {{ post.content[:300]|safe }}...
-                        <a href="{{ url_for('show_post', index=post.id) }}"><em>Read More...</em></a>
+                        <a class="btn btn-outline-success" href="{{ url_for('show_post', index=post.id) }}"><em>Read More...</em></a>
                     </p>
                 </div>
             </div>

@@ -22,7 +22,7 @@
           <p>Journaling</p>
           <p>Content creation</p>
           <p>Debate (apparently it's a hobby)
-        <p><a href="{{ url_for('about') }}"><em>Continue Reading...</em></a></p>
+        <p><a class="btn btn-outline-success" href="{{ url_for('about') }}"><em>Continue Reading...</em></a></p>
        </div>
       </div>
   </section>
@@ -41,7 +41,7 @@
               <img src="{{ url_for('static', filename='img/spotifylogo.png') }}" class="responsive-image-index">
               <h3 class="title">Spotify top-100 songs of the day playlist creator</h3>
               <p class="align-left">Sometimes all we want to do is to create a special playlist for that special day. This project uses Spotify's API, requests module, and web scraping capabilities to seamlessly create that special playlist based on the top 100 billboard songs from any given day of your choice...</p>
-              <p><a href="/post/16"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="/post/16"><em>Read More...</em></a></p>
             </div>
 
             <!-- Second Project -->
@@ -49,7 +49,7 @@
               <img src="{{ url_for('static', filename='img/webbot.png') }}" class="responsive-image-index">
               <h3 class="title">Twitter bot (Automation)</h3>
               <p class="align-left">Bots! They are everywhere. Some even swear they are going to take our jobs but all you've got to do is learn how to make them do the work for you so they don't take your job, they provide you with a new job - watching them. Using Selenium, here's a bot I created to make your tweets for you while you enjoy your beverage...</p>
-              <p><a href="{{ url_for('projects') }}"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="{{ url_for('projects') }}"><em>Read More...</em></a></p>
             </div>
 
             <!-- Third Project -->
@@ -57,7 +57,7 @@
               <img src="{{ url_for('static', filename='img/transcription.png') }}" class="responsive-image-index">
               <h3 class="title">Speech to Text (Transcription)</h3>
               <p class="align-left">Sometimes you just can't catch the words people say or even if you do, you forget after blinking. Not to worry, this project uses pydub and Google Cloud's speech recognition to transcribe any audio you want to transcribe. Best of all, even though Google has an audio size limit of 10MB, you can transcribe any size audio using this code and here's why...</p>
-              <p><a href="/post/17"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="/post/17"><em>Read More...</em></a></p>
             </div>
 
             <!-- Fourth Project -->
@@ -65,9 +65,9 @@
               <img src="{{ url_for('static', filename='img/quizapp.png') }}" class="responsive-image-index">
               <h3 class="title">Quiz Game</h3>
               <p class="align-left">So you think you are smart and can best any quiz at all? Can you face off Quiz_Brain in this tkinter designed game and come out victorious? Answer questions about general and weirdly specific knowledge to test the limits of your intellectual capacity while having fun. No! Do not ask GPT for the answers...</p>
-              <p><a href="/post/26"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="/post/26"><em>Read More...</em></a></p>
             </div>
-            <p><a href="{{ url_for('projects') }}"><em>View More Projects...</em></a></p>
+            <p><a class="btn btn-outline-success" href="{{ url_for('projects') }}"><em>View More Projects...</em></a></p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
         <h3 class="lead-text" id="blog">Blog</h3>
         <!-- Align Recent Posts to Left -->
         <div class="col-12 d-flex justify-content-start">
-            <p><a href="{{ url_for('blogs') }}" class="blog"><em>Recent Posts...</em></a></p>
+            <p><a class="btn btn-outline-success" href="{{ url_for('blogs') }}" id="blog-text"><em>Recent Posts...</em></a></p>
         </div>
         <!-- Projects Section -->
         <div class="col-lg-12">
@@ -92,7 +92,7 @@
               <img src="{{ url_for('static', filename='img/python.png') }}" class="responsive-image-index">
               <h3 class="title">Yapping about Python</h3>
               <p class="align-left">When I started programming, I made a social media post about it and some of you reached out to ask me about my motivation, the difficulties I encounter and how I overcome them so here's a blog of me yapping about everything python. Enjoy!</p>
-              <p><a href="{{ url_for('projects') }}"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="{{ url_for('projects') }}"><em>Read More...</em></a></p>
             </div>
 
             <!-- Second Project -->
@@ -100,9 +100,9 @@
               <img src="{{ url_for('static', filename='img/UG.png') }}" class="responsive-image-index">
               <h3 class="title">UG Escapades</h3>
               <p class="align-left">Living in Ghana is like living in a maze. Living in a university in Ghana is the Hunger Games. You just never know when your very own existence will become a weapon fashioned against you but the good news is I went through the experience so you can learn from mine. Unless...</p>
-              <p><a href="{{ url_for('ugescapades') }}"><em>Read More...</em></a></p>
+              <p><a class="btn btn-outline-success" href="{{ url_for('ugescapades') }}"><em>Read More...</em></a></p>
             </div>
-            <p><a href="{{ url_for('blogs') }}"><em>View All Blog Posts...</em></a></p>
+            <p><a class="btn btn-outline-success" href="{{ url_for('blogs') }}"><em>View All Blog Posts...</em></a></p>
           </div>
         </div>
       </div>
