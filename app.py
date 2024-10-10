@@ -250,6 +250,5 @@ def submit_comment(post_id):
     return redirect(url_for('show_post', index=post_id))
 
 
-
 if __name__ == "__main__":
     app.run(debug=True)
